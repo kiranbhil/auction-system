@@ -27,8 +27,9 @@ This is a simple real-time auction system that allows users to place bids and vi
 <br/>
 <h5> 4). Start the server. </h5>
 <h5>npm run server </h5>
-<h5> 5). Start the client. </h5>
 <h4>The server should now be running on <link>http://localhost:8000</link>. </h4>
+
+<h5> 5). Start the client. </h5>
 <h5>npm start </h5>
 <h4>The application should now be running on http://localhost:3000. </h4>
 # Landing Page<img width="1675" alt="Screenshot 2023-04-17 at 10 29 04 AM" src="https://user-images.githubusercontent.com/73224456/232394521-0d949256-52fa-4292-99dd-b9ffde716757.png">
