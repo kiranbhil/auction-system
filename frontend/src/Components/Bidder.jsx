@@ -1,8 +1,9 @@
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Stack, Text } from '@chakra-ui/react';
+import { Box, Divider, Table, TableCaption, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 // import io from 'socket.io-client';
 import socketIO from "socket.io-client"
 import style from "./Bidder.module.css";
+import moment from "moment";
 
 
 const Bidder = () => {
@@ -12,16 +13,7 @@ const Bidder = () => {
     const [bidderName, setBidderName] = useState('');
     const [bidValue, setBidValue] = useState('');
     const [leaderboard, setLeaderboard] = useState([]);
-    const validate = values => {
-        const errors = {}
-        if (!values.name) {
-          errors.name = 'Required'
-        }
-        if (!values.bidamt) {
-          errors.bidamt = 'Required'
-        }
-        return errors
-      }
+    
       
     useEffect(() => {
     // Receive real-time update of new bid
@@ -30,7 +22,6 @@ const Bidder = () => {
         // Check if bidder already exists in leaderboard
         const bidderIndex = prevLeaderboard.findIndex((b) => b.bidder_id === bidder.bidder_id);
         if (bidderIndex > -1) {
-          // Update existing bidder's bid value
           prevLeaderboard[bidderIndex].bid_value = bidder.bid_value;
           return [...prevLeaderboard];
         } else {
@@ -69,7 +60,6 @@ const Bidder = () => {
       .then(res => res.json())
       .then(data => console.log(data))
       .catch(err => console.log(err));
-
     setBidderName('');
     setBidValue('');
 
@@ -79,7 +69,6 @@ const Bidder = () => {
         setLeaderboard(data);
       })
       .catch(err => console.log(err));
-
 
   };
 
@@ -98,7 +87,8 @@ const Bidder = () => {
         </Box>
         <br />
         <div className={style.Box} >
-        <Text textAlign={"center"} fontSize={"xl"} fontWeight="bold">Place Bid</Text>  
+        <Text  textAlign={"center"} fontSize={"3xl"} fontWeight="bold">Place Bid</Text>  
+        <br />
         <form onSubmit={handleSubmit}>
             <label>
             Name:
@@ -108,18 +98,43 @@ const Bidder = () => {
             Bid Amount:
             <input type="number" value={bidValue} onChange={handleBidChange} required />
             </label>
-            <button className={style.Btn} type="submit">Place Bid</button>
+            <button className={style.Btn}  type="submit">Place Bid</button>
         </form>
         </div>
       <br />    
-      <h2>Leaderboard</h2>
-      <ul>
-        {leaderboard.map((bidder) => (
-          <li key={bidder.bidder_id}>
-            {bidder.bidder_name}: {bidder.bid_value}
-          </li>
-        ))}
-      </ul>
+      <Text backgroundColor={"teal.200"} textAlign={"center"} fontSize={"3xl"} fontWeight="bold">Leaderboard</Text>  
+      <Divider />
+      <br />
+      <br />
+      <TableContainer>
+        <Table variant='striped' colorScheme='pink' border={1}>
+            <TableCaption>Top 5 Bidders</TableCaption>
+            <Thead>
+            <Tr>
+                <Th>Serial No</Th>
+                <Th>Bidder ID</Th>
+                <Th>Bidder Name</Th>
+                <Th>Bid Amount</Th>
+                <Th>Time</Th>
+            </Tr>
+            </Thead>
+            <Tbody>
+            {
+                leaderboard.map((bidder,i) =>(
+                    <Tr key={bidder.bidder_id}>
+                        <Td>L{i+1}</Td>
+                        <Td>{bidder.bidder_id}</Td>
+                        <Td>{bidder.bidder_name}</Td>
+                        <Td>$ {bidder.bid_value}</Td>
+                        {/* <Td>{bidder.bid_time}</Td> */}
+                        <Td>{moment(bidder.bid_time).format("MMMM Do YYYY, h:mm:ss a")}{" "}</Td>
+
+                    </Tr>
+                ))
+            }
+            </Tbody>
+        </Table>
+        </TableContainer>
     </div>
   );
 };
