@@ -1,8 +1,9 @@
+import Bidder from "./Components/Bidder";
 
 function App() {
   return (
     <div >
-      Hello
+      <Bidder/>
     </div>
   );
 }

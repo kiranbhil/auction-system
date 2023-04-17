@@ -1,0 +1,32 @@
+.Btn {
+  background-color: teal;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: aliceblue;
+  }
+  
+.Box{
+    width: 100%;
+    height: auto;
+    border: 2px solid teal;
+    position: relative;
+    margin: 0vw;
+    padding: 2vw;
+    text-align: center; 
+    align-items: center;
+  }
+
+.Box input {
+  padding: 0.4rem 0.6rem 0.4rem 0.6rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.Box label {
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  margin: 0 0 2vh 0;
+}
