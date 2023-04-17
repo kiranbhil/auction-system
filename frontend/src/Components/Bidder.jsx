@@ -8,7 +8,7 @@ import moment from "moment";
 
 const Bidder = () => {
 //   const socket = io('http://localhost:8000');
-    const socket = socketIO.connect("https://auction-backend-m6f2.onrender.com")
+    const socket = socketIO.connect("http://localhost:8000")
     // const [bibberId, setBidderId] = useState('')
     const [bidderName, setBidderName] = useState('');
     const [bidValue, setBidValue] = useState('');
@@ -32,7 +32,7 @@ const Bidder = () => {
     });
 
     // Retrieve leaderboard on initial load
-    fetch('https://auction-backend-m6f2.onrender.com/leaderboard')
+    fetch('http://localhost:8000/leaderboard')
       .then(res => res.json())
       .then(data => {
         setLeaderboard(data);
@@ -46,7 +46,7 @@ const Bidder = () => {
     e.preventDefault();
 
     // Send bid placement API request
-    fetch('https://auction-backend-m6f2.onrender.com/bids', {
+    fetch('http://localhost:8000/bids', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ const Bidder = () => {
     setBidderName('');
     setBidValue('');
 
-    fetch('https://auction-backend-m6f2.onrender.com/leaderboard')
+    fetch('http://localhost:8000/leaderboard')
       .then(res => res.json())
       .then(data => {
         setLeaderboard(data);

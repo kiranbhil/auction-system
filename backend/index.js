@@ -7,7 +7,7 @@ const http = require('http').Server(app);
 const PORT = 8000
 const socketIO = require('socket.io')(http, {
     cors: {
-        origin: "https://thunderous-pie-126169.netlify.app/"
+        origin: "http://localhost:3000"
     }
 });
 app.use(express.json());
